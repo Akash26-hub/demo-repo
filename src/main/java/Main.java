@@ -12,6 +12,7 @@ public class Main {
         WebElement button = browser.findElement(By.id("about"));
         assert(button.isDisplayed());
         button.click();
+        assert(button.getText().equals("about"));
         browser.close();
     }
 }
