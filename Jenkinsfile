@@ -27,19 +27,16 @@ pipeline {
             }
         }
 
+
         stage('Sign in puppet certificate') {
             agent{ label 'master'}
             steps {
+              catchError {
                 sh "sudo /opt/puppetlabs/bin/puppet cert sign node1.local"
+              }
             }
         }
 
-        stage('Install Docker-CE on slave through puppet') {
-            agent{ label 'master'}
-            steps {
-                sh "sudo /opt/puppetlabs/bin/puppet apply /home/edureka/site.pp"
-            }
-        }
 
         stage('Install Docker-CE on slave through puppet') {
             agent{ label 'master'}
@@ -51,23 +48,28 @@ pipeline {
         stage('Git Checkout') {
             agent{ label 'slave'}
             steps {
-                sh "git clone https://github.com/i-doit181/devops-webapp.git && git checkout feature"
+                sh "if [ ! -d '/home/edureka/devops-webapp' ]; then git clone https://github.com/i-doit181/devops-webapp.git /home/edureka/devops-webapp ; fi"
+                sh "cd /home/edureka/devops-webapp && git checkout feature"
             }
         }
 
         stage('Docker Build and Run') {
             agent{ label 'slave'}
             steps {
-                sh "cd /home/edureka/devops-webapp"
-                sh "docker build -t test ."
-                sh "docker run -it -p 80:80 test"
+                sh "cd /home/edureka/devops-webapp && sudo docker build -t test ."
+                sh "sudo docker run -it --name webapp -p 8080:80 test"
             }
         }
 
         stage('Check if selenium test run') {
             agent{ label 'slave'}
             steps {
-                sh "java -jar /tmp/test.jar"
+                sh "cd /home/edureka/devops-webapp && java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar"
+            }
+            post {
+                failure {
+                    sh "sudo docker rm -f webapp"
+                }
             }
         }
     }
