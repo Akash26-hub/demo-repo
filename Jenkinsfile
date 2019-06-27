@@ -57,7 +57,7 @@ pipeline {
             agent{ label 'slave'}
             steps {
                 sh "cd /home/edureka/devops-webapp && sudo docker build -t test ."
-                sh "sudo docker run -it --name webapp -p 8080:80 test"
+                sh "sudo docker run -it -d --name webapp -p 8080:80 test"
             }
         }
 
