@@ -33,7 +33,7 @@
                     <!-- MainClass in mainfest make a executable jar -->
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>com.edureka.Main</mainClass>
                         </manifest>
                     </archive>
 
