@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         WebDriver browser;
         browser = new ChromeDriver();
-        browser.get("http://127.0.0.1:8080");
+        browser.get("http://127.0.0.1/index.php");
         WebElement button = browser.findElement(By.id("about"));
         assert(button.isDisplayed());
         button.click();
