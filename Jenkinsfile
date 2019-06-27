@@ -65,7 +65,7 @@ pipeline {
         }
 
         stage('Check if selenium test run') {
-            agent{ label 'slave']
+            agent{ label 'slave'}
             steps {
                 sh "java -jar /tmp/test.jar"
             }
