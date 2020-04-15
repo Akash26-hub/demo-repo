@@ -29,7 +29,7 @@ pipeline {
 
 
         stage('Sign in puppet certificate') {
-            agent{ label 'master'}
+            agent{ label 'slave'}
             steps {
               catchError {
                 sh "sudo /opt/puppetlabs/bin/puppet cert sign node1.local"
@@ -39,7 +39,7 @@ pipeline {
 
 
         stage('Install Docker-CE on slave through puppet') {
-            agent{ label 'master'}
+            agent{ label 'slave'}
             steps {
                 sh "sudo /opt/puppetlabs/bin/puppet apply /home/edureka/site.pp"
             }
@@ -48,8 +48,8 @@ pipeline {
         stage('Git Checkout') {
             agent{ label 'slave'}
             steps {
-                sh "if [ ! -d '/home/edureka/devops-webapp' ]; then git clone https://github.com/Ad013/Certification.git /home/edureka/devops-webapp ; fi"
-                sh "cd /home/edureka/devops-webapp && git checkout master"
+                sh "if [ ! -d '/home/jenkins/jenkins_slave/workspace/Certification' ]; then git clone https://github.com/Ad013/Certification.git /home/jenkins/jenkins_slave/workspace/Certification ; fi"
+                sh "cd /home/jenkins/jenkins_slave/workspace/Certification && git checkout master"
             }
         }
 
@@ -57,7 +57,7 @@ pipeline {
             agent{ label 'slave'}
             steps {
                 sh "sudo docker rm -f webapp || true"
-                sh "cd /home/edureka/devops-webapp && sudo docker build -t test ."
+                sh "cd /home/jenkins/jenkins_slave/workspace/Certification && sudo docker build -t test ."
                 sh "sudo docker run -it -d --name webapp -p 8080:80 test"
             }
         }
@@ -65,7 +65,7 @@ pipeline {
         stage('Check if selenium test run') {
             agent{ label 'slave'}
             steps {
-                sh "cd /home/edureka/devops-webapp && java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar"
+                sh "cd /home/jenkins/jenkins_slave/workspace/Certification && java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar"
             }
             post {
                 failure {
