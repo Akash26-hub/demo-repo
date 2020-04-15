@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class Main {
 
     public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver","/usr/lib/chromium-browser/chromedriver");
         WebDriver browser;
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
