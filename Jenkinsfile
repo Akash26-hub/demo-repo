@@ -14,7 +14,6 @@ pipeline {
             agent { label 'slave'}
             steps {
                 echo 'Install Puppet'
-                sh "sudo apt-get install -y wget"
                 sh "wget https://apt.puppetlabs.com/puppet-release-xenial.deb"
                 sh "sudo dpkg -i puppet-release-xenial.deb"
                 sh "sudo apt update"
