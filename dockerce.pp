@@ -1,6 +1,5 @@
-class install_docker {
+include 'docker'
 
-  # simple install with all the default options
-  include ::docker
-
+docker::image { 'ubuntu':
+   image_tag => 'trusty',
 }
