@@ -15,8 +15,8 @@ pipeline {
             steps {
                 echo 'Install Puppet'
                 sh "sudo apt-get install -y wget"
-                sh "wget https://apt.puppetlabs.com/puppet-release-bionic.deb"
-                sh "sudo dpkg -i puppet-release-bionic.deb"
+                sh "wget https://apt.puppetlabs.com/puppet-release-xenial.deb"
+                sh "sudo dpkg -i puppet-release-xenial.deb"
                 sh "sudo apt update"
                 sh "sudo apt install -y puppet-agent"
             }
