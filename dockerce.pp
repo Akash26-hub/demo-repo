@@ -1,5 +1,7 @@
-include 'docker'
-
-docker::image { 'ubuntu':
-   image_tag => 'trusty',
-}
+class devopsin::install {
+ exec {'apt-update':
+ command => '/usr/bin/apt-get update'
+ }
+ package{'docker.io':
+ ensure => present
+ 
