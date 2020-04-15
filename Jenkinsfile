@@ -48,7 +48,7 @@ pipeline {
         stage('Git Checkout') {
             agent{ label 'slave'}
             steps {
-                sh "if [ ! -d '/home/edureka/devops-webapp' ]; then git clone https://github.com/i-doit181/devops-webapp.git /home/edureka/devops-webapp ; fi"
+                sh "if [ ! -d '/home/edureka/devops-webapp' ]; then git clone https://github.com/Ad013/Certification.git /home/edureka/devops-webapp ; fi"
                 sh "cd /home/edureka/devops-webapp && git checkout master"
             }
         }
