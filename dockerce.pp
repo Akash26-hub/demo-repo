@@ -1,15 +1,12 @@
-include docker
+class install_docker {
 
-class { 'docker':
-  use_upstream_package_source => false,
-}
+  # simple install with all the default options
+  include ::docker
 
-class { 'docker':
-  version => '17.09.0~ce-0~debian',
-}
+  # or you can customise the install
+  class { 'docker' :
+    manage_package => true,
+    package_name   => 'docker-engine',
+  }
 
-class { 'docker':
-  docker_ee => true,
-  docker_ee_source_location => 'https://download.docker.com/linux/ubuntu/dists/xenial/stable/',
-  docker_ee_key_source => 'https://download.docker.com/linux/ubuntu/gpg',
 }
