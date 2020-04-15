@@ -50,6 +50,7 @@ pipeline {
         stage('Install Docker-CE on slave through puppet') {
             agent{ label 'slave'}
             steps {
+                sh "sudo /opt/puppetlabs/bin/puppet module install garethr-docker"
                 sh "sudo /opt/puppetlabs/bin/puppet apply /home/jenkins/jenkins_slave/workspace/Certification/dockerce.pp"
             }
         }
