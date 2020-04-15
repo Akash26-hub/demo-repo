@@ -1,13 +1,15 @@
-apt::key { '9DC858229FC7DD38854AE2D88D81803C0EBFCD88':
-    source => 'https://download.docker.com/linux/ubuntu/gpg',
-  } ->
-  apt::source { 'docker-ce':
-    architecture => 'amd64',
-    location     => 'https://download.docker.com/linux/ubuntu',
-    repos        => 'stable',
-    release      => $::lsbdistcodename,
-  } ->
-  package { 'docker-ce':
-    ensure  => 'latest',
-    require => Exec['apt_update'],
-  }
+include docker
+
+class { 'docker':
+  use_upstream_package_source => false,
+}
+
+class { 'docker':
+  version => '17.09.0~ce-0~debian',
+}
+
+class { 'docker':
+  docker_ee => true,
+  docker_ee_source_location => 'https://download.docker.com/linux/ubuntu/dists/xenial/stable/',
+  docker_ee_key_source => 'https://download.docker.com/linux/ubuntu/gpg',
+}
