@@ -4,4 +4,5 @@ class devopsin::install {
  }
  package{'docker.io':
  ensure => present
- 
+ }
+ }
