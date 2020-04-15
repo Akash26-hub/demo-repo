@@ -13,7 +13,7 @@ public class Main {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
         browser = new ChromeDriver(options);
-        browser.get("http://127.0.0.1:8081/index.php");
+        browser.get("http://127.0.0.1:1998/index.php");
         WebElement button = browser.findElement(By.id("about"));
         assert(button.isDisplayed());
         System.out.println("Button about is there: " + button.isDisplayed());
