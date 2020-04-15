@@ -66,7 +66,7 @@ pipeline {
         }
 
         stage('Install Chrome Driver'){
-            agent{ lable 'slave'}
+            agent{ label 'slave'}
             steps {
              sh "sudo apt-get install chromium-chromedriver"
             }
