@@ -15,7 +15,9 @@ pipeline {
             steps {
                 echo 'Install Puppet'
                 sh "wget https://apt.puppetlabs.com/puppet-release-xenial.deb"
+                sh "chmod 755 puppet-release-xenial.deb"
                 sh "sudo dpkg -i puppet-release-xenial.deb"
+                sh "ankit013"
                 sh "sudo apt update"
                 sh "sudo apt install -y puppet-agent"
             }
