@@ -39,7 +39,7 @@ pipeline {
         }
 
 
-        stage('Install Docker-CE & Git on slave through puppet') {
+        stage('Install Docker-CE on slave through puppet') {
             agent{ label 'slave'}
             steps {
                 sh "sudo /opt/puppetlabs/bin/puppet module install garethr-docker"
