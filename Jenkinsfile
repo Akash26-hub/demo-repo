@@ -84,7 +84,7 @@ pipeline {
         stage('Check if selenium test run') {
             agent{ label 'slave'}
             steps {
-                sh "cd /home/jenkins/jenkins_slave/workspace/Certification/src/main/java/com/edureka && export export CLASSPATH="$HOME/Desktop.:selenium-server-standalone-3.141.59.jar:testng-6.8.7.jar" && javac Main.java"
+                sh "cd /home/jenkins/jenkins_slave/workspace/Certification/src/main/java/com/edureka && export export CLASSPATH="/$HOME/Desktop.:selenium-server-standalone-3.141.59.jar:testng-6.8.7.jar" && javac Main.java"
                 sh "java Main"
             }
             post {
