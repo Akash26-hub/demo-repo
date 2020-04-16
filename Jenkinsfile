@@ -74,12 +74,11 @@ pipeline {
                     sh "java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar"
                          }
                 }
-                
+            }
             post {
                 failure {
                     sh "echo Failure"
                 }
-            }
         }
     }
 }
