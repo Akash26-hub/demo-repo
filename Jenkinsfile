@@ -70,6 +70,7 @@ pipeline {
             steps {
 		sh "cd /home/jenkins/jenkins_slave/workspace/Certification/"
 		sh "sleep 30"
+		sh "exit"
 		sh "java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar --headless"
             	}
             post {
