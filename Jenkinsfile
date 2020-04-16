@@ -69,10 +69,10 @@ pipeline {
             agent{ label 'slave'}
             steps {
                 timeout(time: 1, unit: 'MINUTES') {
-					retry(2) {
-						sh "cd /home/jenkins/jenkins_slave/workspace/Certification/"
-						sh "java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar"
-					}
+			retry(2) {
+				sh "cd /home/jenkins/jenkins_slave/workspace/Certification/"
+				sh "java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar --headless"
+				}
                 }
             }
             post {
