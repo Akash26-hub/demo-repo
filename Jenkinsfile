@@ -72,7 +72,7 @@ pipeline {
             }
             post {
                 failure {
-                    sh "sudo docker rm -f webapp"
+                    sh "echo Failure"
                 }
             }
         }
