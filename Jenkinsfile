@@ -67,7 +67,22 @@ pipeline {
         stage('Install Chrome Driver'){
             agent{ label 'slave'}
             steps {
-             sh "sudo apt-get install chromium-chromedriver -y"
+             sh "sudo apt-get update"
+             sh "sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4"
+             sh "sudo apt-get install default-jdk"
+             sh "sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add"
+             sh "sudo echo "deb [arch=amd64]  http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list"
+             sh "sudo apt-get -y update"
+             sh "sudo apt-get -y install google-chrome-stable"
+             sh "wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip"
+             sh "unzip chromedriver_linux64.zip"
+             sh "sudo mv chromedriver /usr/bin/chromedriver"
+             sh "sudo chown root:root /usr/bin/chromedriver"
+             sh "sudo chmod +x /usr/bin/chromedriver"
+             sh "get https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar"
+             sh "wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip"
+             sh "unzip testng-6.8.7.jar.zip"
+             sh "xvfb-run java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar selenium-server-standalone.jar"
             }
         }
         stage('Check if selenium test run') {
