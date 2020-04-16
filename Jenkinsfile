@@ -70,6 +70,7 @@ pipeline {
             steps {
 		sh "cd /home/jenkins/jenkins_slave/workspace/Certification/"
 		sh "exit"
+		sh "who"
 		sh "su edureka"
 		sh "java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar --headless"
             	}
