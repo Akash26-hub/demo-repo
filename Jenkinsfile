@@ -2,14 +2,6 @@ pipeline {
     agent none
     stages {
         
-        stage('Git Checkout') {
-            agent{ label 'slave'}
-            steps {
-                sh "if [ ! -d '/home/jenkins/jenkins_slave/workspace/Certification' ]; then git clone https://github.com/Ad013/Certification.git /home/jenkins/jenkins_slave/workspace/Certification ; fi"
-                sh "cd /home/jenkins/jenkins_slave/workspace/Certification && git checkout master"
-            }
-        }
-        
         stage('install puppet on slave') {
             agent { label 'slave'}
             steps {
@@ -47,7 +39,7 @@ pipeline {
         }
 
 
-        stage('Install Docker-CE on slave through puppet') {
+        stage('Install Docker-CE & Git on slave through puppet') {
             agent{ label 'slave'}
             steps {
                 sh "sudo /opt/puppetlabs/bin/puppet module install garethr-docker"
@@ -55,7 +47,14 @@ pipeline {
             }
         }
 
-
+        stage('Git Checkout') {
+            agent{ label 'slave'}
+            steps {
+                sh "if [ ! -d '/home/jenkins/jenkins_slave/workspace/Certification' ]; then git clone https://github.com/Ad013/Certification.git /home/jenkins/jenkins_slave/workspace/Certification ; fi"
+                sh "cd /home/jenkins/jenkins_slave/workspace/Certification && git checkout master"
+            }
+        }
+        
         stage('Docker Build and Run') {
             agent{ label 'slave'}
             steps {
