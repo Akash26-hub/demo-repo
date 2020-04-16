@@ -61,7 +61,6 @@ pipeline {
                 sh "sudo docker rm -f webapp || true"
                 sh "cd /home/jenkins/jenkins_slave/workspace/Certification && sudo docker build -t test ."
                 sh "sudo docker run -it -d --name webapp -p 1998:80 test"
-		sh "sleep 5"
             }
         }
 
@@ -72,6 +71,7 @@ pipeline {
                 timeout(time: 1, unit: 'MINUTES') {
 			retry(2) {
 				sh "cd /home/jenkins/jenkins_slave/workspace/Certification/"
+				sh "sleep 30"
 				sh "java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar --headless"
 				}
                 }
