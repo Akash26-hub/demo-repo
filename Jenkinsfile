@@ -61,6 +61,7 @@ pipeline {
                 sh "sudo docker rm -f webapp || true"
                 sh "cd /home/jenkins/jenkins_slave/workspace/Certification && sudo docker build -t test ."
                 sh "sudo docker run -it -d --name webapp -p 1998:80 test"
+		sh "sleep 3000"
             }
         }
 
