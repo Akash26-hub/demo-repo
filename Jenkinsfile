@@ -78,7 +78,7 @@ pipeline {
              sh "wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar"
              sh "wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip"
              sh "unzip testng-6.8.7.jar.zip"
-             sh "xvfb-run java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar selenium-server-standalone.jar"
+             sh "xvfb-run java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar /home/jenkins/jenkins_slave/workspace/Certification/selenium-server-standalone.jar"
             }
         }
         stage('Check if selenium test run') {
