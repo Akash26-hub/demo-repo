@@ -64,23 +64,7 @@ pipeline {
             }
         }
 
-        stage('Install Chrome Driver'){
-            agent{ label 'slave'}
-            steps {
-             sh "sudo apt-get update"
-             sh "sudo apt-get install -y unzip xvfb libxi6 libgconf-2-4"
-             sh "sudo apt-get install default-jdk"
-             sh "wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip"
-             sh "unzip chromedriver_linux64.zip"
-             sh "sudo mv chromedriver /usr/bin/chromedriver"
-             sh "sudo chown root:root /usr/bin/chromedriver"
-             sh "sudo chmod +x /usr/bin/chromedriver"
-             sh "wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar"
-             sh "wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip"
-             sh "unzip -u testng-6.8.7.jar.zip"
-             sh "xvfb-run java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar /home/jenkins/jenkins_slave/workspace/Certification/selenium-server-standalone-3.141.59.jar"
-            }
-        }
+
         stage('Check if selenium test run') {
             agent{ label 'slave'}
             steps {
