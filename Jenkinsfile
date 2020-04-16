@@ -68,13 +68,13 @@ pipeline {
         stage('Check if selenium test run') {
             agent{ label 'slave'}
             steps {
+                timeout(time: 1, unit: 'MINUTES') {
                 retry(2) {
-                    sh 'cd /home/jenkins/jenkins_slave/workspace/Certification/ && java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar'
+                    sh "cd /home/jenkins/jenkins_slave/workspace/Certification/"
+                    sh "java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar"
+                         }
                 }
-                    timeout(time: 1, unit: 'MINUTES') {
-                        sh "cd /home/jenkins/jenkins_slave/workspace/Certification/ && java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar"
-                    }
-                  }
+                
             post {
                 failure {
                     sh "echo Failure"
