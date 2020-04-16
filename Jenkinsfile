@@ -75,7 +75,7 @@ pipeline {
              sh "sudo mv chromedriver /usr/bin/chromedriver"
              sh "sudo chown root:root /usr/bin/chromedriver"
              sh "sudo chmod +x /usr/bin/chromedriver"
-             sh "get https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar"
+             sh "wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar"
              sh "wget http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip"
              sh "unzip testng-6.8.7.jar.zip"
              sh "xvfb-run java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar selenium-server-standalone.jar"
