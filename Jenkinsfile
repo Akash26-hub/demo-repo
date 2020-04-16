@@ -6,9 +6,9 @@ pipeline {
             agent { label 'slave'}
             steps {
                 echo 'Install Puppet'
-                sh "wget https://apt.puppetlabs.com/puppet-release-xenial.deb"
-                sh "chmod 755 puppet-release-xenial.deb"
-                sh "sudo dpkg -i puppet-release-xenial.deb"
+                sh "wget https://apt.puppetlabs.com/puppet-release-bionic.deb"
+                sh "chmod 755 puppet-release-bionic.deb"
+                sh "sudo dpkg -i puppet-release-bionic.deb"
                 sh "sudo apt update"
                 sh "sudo apt install -y puppet-agent"
             }
