@@ -6,4 +6,5 @@
         package{'docker.io':
                 ensure => present
         }
-
+        
+        include git
