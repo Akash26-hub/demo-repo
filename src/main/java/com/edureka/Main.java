@@ -1,25 +1,29 @@
 package com.edureka;
 
+import java.io.IOException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class Main {
 
-    public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver","/usr/lib/chromium-browser/chromedriver");
-        WebDriver browser;
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
-        browser = new ChromeDriver(options);
-        browser.get("http://127.0.0.1:1998/index.php");
-        WebElement button = browser.findElement(By.id("about"));
+    public static void main(String[] args) throws IOException, InterruptedException{
+
+        FirefoxBinary firefoxBinary = new FirefoxBinary();
+        firefoxBinary.addCommandLineOptions("--headless");
+        firefoxBinary.addCommandLineOptions("--no-sandbox");
+        System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setBinary(firefoxBinary);
+        FirefoxDriver driver = new FirefoxDriver(firefoxOptions);
+        driver.get("http://127.0.0.1:1998/index.php");
+        WebElement button = driver.findElement(By.id("about"));
         assert(button.isDisplayed());
         System.out.println("Button about is there: " + button.isDisplayed());
         button.click();
         assert(button.getText().equals("about"));
-        browser.close();
+        driver.close();
     }
 }
