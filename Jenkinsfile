@@ -50,7 +50,7 @@ pipeline {
         stage('Git Checkout') {
             agent{ label 'slave'}
             steps {
-                sh "if [ ! -d '/home/jenkins/jenkins_slave/workspace/Certification' ]; then git clone https://github.com/Ad013/Certification.git /home/jenkins/jenkins_slave/workspace/Certification ; fi"
+                sh "if [ ! -d '/home/jenkins/jenkins_slave/workspace/Certification' ]; then git clone https://github.com/Akash26-hub/demo-repo.git /home/jenkins/jenkins_slave/workspace/Certification ; fi"
                 sh "cd /home/jenkins/jenkins_slave/workspace/Certification && sudo git checkout master"
             }
         }
@@ -69,9 +69,6 @@ pipeline {
             agent{ label 'slave'}
             steps {
 		sh "cd /home/jenkins/jenkins_slave/workspace/Certification/"
-		sh "exit"
-		sh "who"
-		sh "su edureka"
 		sh "java -jar devops-webapp-1.0-SNAPSHOT-jar-with-dependencies.jar --headless"
             	}
             post {
