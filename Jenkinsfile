@@ -28,17 +28,6 @@ pipeline {
             }
         }
 
-
-        stage('Sign in puppet certificate') {
-            agent{ label 'slave'}
-            steps {
-              catchError {
-                sh "sudo /opt/puppetlabs/bin/puppet cert sign node1.local"
-              }
-            }
-        }
-
-
         stage('Install Docker-CE on slave through puppet') {
             agent{ label 'slave'}
             steps {
